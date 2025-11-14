@@ -13,10 +13,8 @@ const cols = Math.floor(board.clientWidth / 40);
 
 
 // Gesture controls for mobile
-let touchStartX = 0,
-  touchStartY = 0,
-  touchEndX = 0,
-  touchEndY = 0;
+
+let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
 
 function handleGesture() {
   const dx = touchEndX - touchStartX;
@@ -36,8 +34,10 @@ board.addEventListener(
     if (e.touches.length === 1) {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
+      touchEndX = touchStartX;
+      touchEndY = touchStartY;
     }
-    e.preventDefault();
+    // Only prevent default if it's a swipe, not a tap
   },
   { passive: false }
 );
@@ -57,8 +57,11 @@ board.addEventListener(
 board.addEventListener(
   "touchend",
   function (e) {
-    handleGesture();
-    e.preventDefault();
+    // Only treat as gesture if there was a swipe, not a tap
+    if (Math.abs(touchEndX - touchStartX) > 10 || Math.abs(touchEndY - touchStartY) > 10) {
+      handleGesture();
+      e.preventDefault();
+    }
   },
   { passive: false }
 );
