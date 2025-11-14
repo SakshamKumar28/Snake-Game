@@ -1,3 +1,35 @@
+// Gesture controls for mobile
+let touchStartX = 0, touchStartY = 0, touchEndX = 0, touchEndY = 0;
+
+function handleGesture() {
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 30 && direction !== "left") direction = "right";
+        else if (dx < -30 && direction !== "right") direction = "left";
+    } else {
+        if (dy > 30 && direction !== "up") direction = "down";
+        else if (dy < -30 && direction !== "down") direction = "up";
+    }
+}
+
+board.addEventListener("touchstart", function(e) {
+    if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }
+}, { passive: true });
+
+board.addEventListener("touchmove", function(e) {
+    if (e.touches.length === 1) {
+        touchEndX = e.touches[0].clientX;
+        touchEndY = e.touches[0].clientY;
+    }
+}, { passive: true });
+
+board.addEventListener("touchend", function(e) {
+    handleGesture();
+}, { passive: true });
 const board = document.querySelector(".board");
 const scoreDisplay = document.getElementById("score");
 const highScoreDisplay = document.getElementById("high-score");
