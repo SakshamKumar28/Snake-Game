@@ -22,11 +22,11 @@ function handleGesture() {
   const dx = touchEndX - touchStartX;
   const dy = touchEndY - touchStartY;
   if (Math.abs(dx) > Math.abs(dy)) {
-    if (dx > 30 && direction !== "left") direction = "right";
-    else if (dx < -30 && direction !== "right") direction = "left";
+    if (dx > 30 && direction !== "right") direction = "right";
+    else if (dx < -30 && direction !== "left") direction = "left";
   } else {
-    if (dy > 30 && direction !== "up") direction = "down";
-    else if (dy < -30 && direction !== "down") direction = "up";
+    if (dy > 30 && direction !== "down") direction = "down";
+    else if (dy < -30 && direction !== "up") direction = "up";
   }
 }
 
