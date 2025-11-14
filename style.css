@@ -106,6 +106,10 @@ section .board{
 
 .menu .start-game, .menu .game-over{
     color: var(--text-color);
+    display: none;
+}
+.menu .active {
+    display: block;
 }
 
 #start-btn, #restart-btn{
