@@ -37,8 +37,9 @@ board.addEventListener(
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
     }
+    e.preventDefault();
   },
-  { passive: true }
+  { passive: false }
 );
 
 board.addEventListener(
@@ -48,16 +49,18 @@ board.addEventListener(
       touchEndX = e.touches[0].clientX;
       touchEndY = e.touches[0].clientY;
     }
+    e.preventDefault();
   },
-  { passive: true }
+  { passive: false }
 );
 
 board.addEventListener(
   "touchend",
   function (e) {
     handleGesture();
+    e.preventDefault();
   },
-  { passive: true }
+  { passive: false }
 );
 
 let highScore = parseInt(localStorage.getItem("highScore")) || 0;
